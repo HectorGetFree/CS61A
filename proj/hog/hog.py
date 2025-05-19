@@ -268,6 +268,16 @@ def make_averaged(original_function, times_called=1000):
 
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def averaged(*args):
+        result = 0
+        i = 1
+        while i <= times_called:
+            result += original_function(*args)
+            i += 1
+        result /= times_called
+        return result
+
+    return averaged
     # END PROBLEM 8
 
 
