@@ -32,6 +32,11 @@ def product(n, term):
     162
     """
     "*** YOUR CODE HERE ***"
+    result = 1
+    while n != 0:
+        result *= term(n)
+        n -= 1
+    return result
 
 
 def accumulate(fuse, start, n, term):
