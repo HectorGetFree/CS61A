@@ -240,6 +240,17 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    i = 0
+    j = 0
+    baseline = strategy(i, j)
+    while i < goal:
+        j = 0
+        while j < goal:
+            if strategy(i, j) != baseline:
+                return False
+            j += 1
+        i += 1
+    return True
     # END PROBLEM 7
 
 
