@@ -373,7 +373,16 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
-    return 6  # Remove this line once implemented.
+    if score > opponent_score or score >= 90:
+        if score + boar_brawl(score, opponent_score) >= 100:
+            return 0
+        elif score + roll_dice(1) >= 100:
+            return 1
+        elif score + roll_dice(2) >= 100:
+            return 2
+    elif score < opponent_score:
+        return 6
+    return 0  # Remove this line once implemented.
     # END PROBLEM 12
 
 
