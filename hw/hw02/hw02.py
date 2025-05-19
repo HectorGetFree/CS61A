@@ -119,4 +119,11 @@ def make_repeater(f, n):
     390625
     """
     "*** YOUR CODE HERE ***"
-
+    def repeater(k):
+        result = k
+        times = n
+        while times != 0:
+            result = f(result)
+            times -= 1
+        return result
+    return repeater
