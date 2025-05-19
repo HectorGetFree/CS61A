@@ -1,4 +1,5 @@
 """The Game of Hog."""
+from math import sqrt, floor
 
 from dice import six_sided, make_test_dice
 from ucb import main, trace, interact
@@ -101,6 +102,16 @@ def num_factors(n):
     """Return the number of factors of N, including 1 and N itself."""
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    i = 1
+    count = 0
+    while i <= sqrt(n):
+        if n % i == 0:
+            if i * i != n:
+                count += 1
+            else:
+                count += 1/2
+        i += 1
+    return floor(count * 2)
     # END PROBLEM 4
 
 
@@ -108,6 +119,10 @@ def sus_points(score):
     """Return the new score of a player taking into account the Sus Fuss rule."""
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    if num_factors(score) == 3 or num_factors(score) == 4:
+        while not is_prime(score):
+            score += 1
+    return score
     # END PROBLEM 4
 
 
@@ -117,6 +132,8 @@ def sus_update(num_rolls, player_score, opponent_score, dice=six_sided):
     """
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    score = player_score + take_turn(num_rolls, player_score, opponent_score, dice)
+    return sus_points(score)
     # END PROBLEM 4
 
 
