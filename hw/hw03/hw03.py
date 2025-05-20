@@ -185,6 +185,28 @@ def count_dollars_upward(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    if total >= 100:
+        next = 100
+    elif 100 > total >= 50:
+        next = 50
+    elif 50 > total >= 20:
+        next = 20
+    elif 20 > total >= 10:
+        next = 10
+    elif 10 > total >= 5:
+        next = 5
+    else:
+        next = 1
+
+    def helper(n, m):
+        if m is None or m > next:
+            return 0
+        if n == 0:
+            return 1
+        if n < 0:
+            return 0
+        return helper(n-m, m) + helper(n, next_larger_dollar(m))
+    return helper(total, 1)
 
 
 def print_move(origin, destination):
