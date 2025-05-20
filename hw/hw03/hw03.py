@@ -127,7 +127,29 @@ def count_dollars(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    def count_helper(n, m):
+        if n == 0:
+            return 1
+        elif n < 0:
+            return 0
+        elif m is None:
+            return 0
+        return count_helper(n - m, m) + count_helper(n, next_smaller_dollar(m))
 
+
+    if total >= 100:
+        next = 100
+    elif 100 > total >= 50:
+        next = 50
+    elif 50 > total >= 20:
+        next = 20
+    elif 20 > total >= 10:
+        next = 10
+    elif 10 > total >= 5:
+        next = 5
+    else:
+        next = 1
+    return count_helper(total, next)
 
 def next_larger_dollar(bill):
     """Returns the next larger bill in order."""
