@@ -81,7 +81,17 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
+    def odd_recursive(k, odd_func):
+        if k > n :
+            return 0
+        return odd_func(k) + odd_recursive(k + 2, odd_func)
 
+    def even_recursive(e, even_func):
+        if e > n:
+            return 0
+        return even_func(e) + even_recursive(e + 2, even_func)
+
+    return odd_recursive(1, odd_func) + even_recursive(2, even_func)
 
 def next_smaller_dollar(bill):
     """Returns the next smaller bill in order."""
