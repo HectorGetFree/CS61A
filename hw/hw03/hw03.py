@@ -263,5 +263,9 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    # 使用Y组合子
+    return (lambda f: (lambda x: f(lambda v: x(x)(v)))
+           (lambda x: f(lambda v: x(x)(v)))
+            )(lambda fact: lambda n: 1 if n == 1 else mul(n, fact(n - 1)))
+
 
