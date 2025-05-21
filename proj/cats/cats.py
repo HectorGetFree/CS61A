@@ -277,19 +277,29 @@ def minimum_mewtations(typed, source, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    if limit < 0:
-        return 1
     if typed == source:
         return 0
+
+    if limit < 0:
+        return limit + 1  # 超出限制，剪枝
+
+    if limit == 0:
+        # 如果不能再编辑，只允许完全相同的串
+        return max(len(typed), len(source))  # 若不等价就返回超出 limit 的值
+
     if not typed or not source:
-        return max(len(typed), len(source))
+        return max(len(typed), len(source))  # 插入/删除剩余部分
+
     if typed[0] == source[0]:
+        # 当前字符相等，继续比对后续部分
         return minimum_mewtations(typed[1:], source[1:], limit)
-    else:
-        add = 1 + minimum_mewtations(typed, source[1:], limit - 1)
-        delete = 1 + minimum_mewtations(typed[1:], source, limit - 1)
-        substitute = 1 + minimum_mewtations(typed[1:], source[1:], limit - 1)
-        return min(add, delete, substitute)
+
+        # 三种操作尝试：插入、删除、替换
+    add = 1 + minimum_mewtations(typed, source[1:], limit - 1)  # 插入
+    delete = 1 + minimum_mewtations(typed[1:], source, limit - 1)  # 删除
+    substitute = 1 + minimum_mewtations(typed[1:], source[1:], limit - 1)  # 替换
+
+    return min(add, delete, substitute)
 
 
 
