@@ -62,6 +62,16 @@ def about(keywords):
 
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    def check(pra):
+        pra = remove_punctuation(pra)
+        pra = lower(pra)
+        pra = split(pra)
+        for keyword in keywords:
+            if not keyword is None and lower(keyword) in pra:
+                return True
+        return False
+    return check
+
     # END PROBLEM 2
 
 
