@@ -1,7 +1,11 @@
 """Ants Vs. SomeBees."""
 
 import random
-from ucb import main, interact, trace
+#
+# from numba.core.imputils import lower_builtin
+# from numba.cuda.cudaimpl import lower
+#
+# from ucb import main, interact, trace
 from collections import OrderedDict
 
 ################
@@ -172,6 +176,8 @@ class ThrowerAnt(Ant):
     damage = 1
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 3
+    lower_bound = 0
+    upper_bound = float('inf')
 
     def nearest_bee(self):
         """Return a random Bee from the nearest Place (excluding the Hive) that contains Bees and is reachable from
@@ -181,10 +187,12 @@ class ThrowerAnt(Ant):
         """
         # BEGIN Problem 3 and 4
         p = self.place
+        count = 0
         while not p.is_hive:
-            if p.bees:
+            if self.lower_bound <= count <= self.upper_bound and p.bees:
                 return random_bee(p.bees)
             p = p.entrance
+            count += 1
         return None
         # END Problem 3 and 4
 
@@ -216,8 +224,10 @@ class ShortThrower(ThrowerAnt):
     name = 'Short'
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
+    lower_bound = 0
+    upper_bound = 3
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
@@ -227,8 +237,10 @@ class LongThrower(ThrowerAnt):
     name = 'Long'
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
+    lower_bound = 5
+    upped_bound = float('inf')
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
