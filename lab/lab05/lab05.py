@@ -1,3 +1,5 @@
+from ctypes import string_at
+
 HW_SOURCE_FILE=__file__
 
 
@@ -167,6 +169,16 @@ def sprout_leaves(t, leaves):
           2
     """
     "*** YOUR CODE HERE ***"
+    if not branches(t):
+        sprout = []
+        for leave in leaves:
+            sprout.append(tree(leave))
+        return tree(label(t), sprout)
+    new_branch = []
+    for b in branches(t):
+        new_branch.append(sprout_leaves(b, leaves))
+    return tree(label(t), new_branch)
+
 
 
 def partial_reverse(s, start):
@@ -182,7 +194,12 @@ def partial_reverse(s, start):
     [1, 2, 7, 6, 5, 3, 4]
     """
     "*** YOUR CODE HERE ***"
-
+    i = start
+    j = len(s) - 1
+    while i < j:
+        s[i], s[j] = s[j], s[i]
+        i += 1
+        j -= 1
 
 
 # Tree Data Abstraction
