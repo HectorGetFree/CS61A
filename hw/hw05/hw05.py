@@ -10,6 +10,15 @@ def hailstone(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    if n <= 1:
+        while True:
+            yield 1
+    else:
+        yield n
+    if n % 2 == 0:
+        yield from hailstone(n // 2)
+    else:
+        yield from hailstone(n * 3 + 1)
 
 
 def merge(a, b):
