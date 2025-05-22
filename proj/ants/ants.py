@@ -283,8 +283,10 @@ class FireAnt(Ant):
 class WallAnt(Ant):
     name = 'Wall'
     implemented = True
-    def __init__(self):
-        self.health = 4
+    food_cost = 4
+    def __init__(self, health=4):
+        super().__init__(health)
+
 # END Problem 6
 
 # BEGIN Problem 7
