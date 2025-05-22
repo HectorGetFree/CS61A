@@ -27,6 +27,23 @@ def insert_items(s, before, after):
     True
     """
     "*** YOUR CODE HERE ***"
+    i = 0
+    while i < len(s):
+        if s[i] == before:
+            s.insert(i + 1, after)
+            i += 2 # 这里为什么跳过新插入的索引，是因为，如果before==after那就会一直插入，陷入死循环
+        else:
+            i += 1
+    return s
+    # 下面这种方法不可行的原因是，函数对s尽管按照引用传递，但是我们只改变了该函数内部的s
+    # 这种变化反映不到函数外部，即对参数重新赋值是无法作用到外部的，但是修改是可以的
+    # copy = []
+    # for x in s:
+    #     copy.append(x)
+    #     if x == before:
+    #         copy.append(after)
+    # s = copy
+    # return copy
 
 
 def group_by(s, fn):
@@ -40,12 +57,12 @@ def group_by(s, fn):
     {9: [-3, 3], 4: [-2, 2], 1: [-1, 1], 0: [0]}
     """
     grouped = {}
-    for ____ in ____:
-        key = ____
+    for x in s:
+        key = fn(x)
         if key in grouped:
-            ____
+            grouped[key].append(x)
         else:
-            grouped[key] = ____
+            grouped[key] = [x]
     return grouped
 
 
