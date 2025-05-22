@@ -40,10 +40,17 @@ def merge(a, b):
     while True:
         if a_val == b_val:
             "*** YOUR CODE HERE ***"
+            yield a_val
+            a_val = next(a)
+            b_val = next(b)
         elif a_val < b_val:
             "*** YOUR CODE HERE ***"
+            yield a_val
+            a_val = next(a)
         else:
             "*** YOUR CODE HERE ***"
+            yield b_val
+            b_val = next(b)
 
 
 def stair_ways(n):
@@ -60,6 +67,14 @@ def stair_ways(n):
     []
     """
     "*** YOUR CODE HERE ***"
+    if n == 0:
+        yield []
+    if n < 0:
+        return
+    for way in stair_ways(n - 1):
+        yield [1] + way
+    for way in stair_ways(n - 2):
+        yield [2] + way
 
 
 def yield_paths(t, value):
