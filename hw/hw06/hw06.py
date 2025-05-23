@@ -169,6 +169,14 @@ def deep_map_mut(func, s):
     <9 <16> 25 36>
     """
     "*** YOUR CODE HERE ***"
+    if s is Link.empty:
+        return
+    if not isinstance(s.first, Link):
+        s.first = func(s.first)
+    else:
+        s.first.first = func(s.first.first)
+        deep_map_mut(func, s.first.rest)
+    deep_map_mut(func, s.rest)
 
 
 def prune_small(t, n):
