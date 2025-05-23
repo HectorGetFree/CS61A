@@ -1,16 +1,15 @@
 import ants
 import argparse
-from ants import AssaultPlan
 
 
 def make_test_assault_plan(ants_impl=None):
     ants_impl = ants_impl or ants
-    return AssaultPlan().add_wave(ants_impl.Bee, 3, 2, 1).add_wave(ants_impl.Bee, 3, 3, 1)
+    return ants.AssaultPlan().add_wave(ants_impl.Bee, 3, 2, 1).add_wave(ants_impl.Bee, 3, 3, 1)
 
 
 def make_easy_assault_plan(ants_impl=None):
     ants_impl = ants_impl or ants_impl
-    plan = AssaultPlan()
+    plan = ants.AssaultPlan()
     for time in range(3, 16, 2):
         plan.add_wave(ants_impl.Bee, 3, time, 1) # Adding 1 bee of health 3 at timestamp TIME
     plan.add_wave(ants_impl.Wasp, 3, 4, 1) # Assing 1 wasp of health 3 at timestamp 4
@@ -22,7 +21,7 @@ def make_easy_assault_plan(ants_impl=None):
 
 def make_normal_assault_plan(ants_impl=None):
     ants_impl = ants_impl or ants
-    plan = AssaultPlan()
+    plan = ants.AssaultPlan()
 
     for time in range(3, 16, 2): # Adding 2 bees (1 bee for time = 3, 5) of health 3 at timestamp 3, 5, 7, 9, 11, 13, 15
         if time == 3 or time == 5:
@@ -67,7 +66,7 @@ def make_normal_assault_plan(ants_impl=None):
 
 def make_hard_assault_plan(ants_impl=None):
     ants_impl = ants_impl or ants
-    plan = AssaultPlan()
+    plan = ants.AssaultPlan()
 
     for time in range(3, 9, 2): # Adding 2 bees (1 bee for time = 3) of health 3 at timestamp 3, 5, 7
         if time == 3:
@@ -115,7 +114,7 @@ def make_hard_assault_plan(ants_impl=None):
 
 def make_extra_hard_assault_plan(ants_impl=None):
     ants_impl = ants_impl or ants
-    plan = AssaultPlan()
+    plan = ants.AssaultPlan()
 
     for time in range(3, 9, 2): # Adding 2 bees of health 3 at timestamp 3, 5, 7
         plan.add_wave(ants_impl.Bee, 3, time, 2)

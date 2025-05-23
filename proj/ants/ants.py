@@ -1,12 +1,11 @@
 """Ants Vs. SomeBees."""
 
 import random
-#
-# from numba.core.imputils import lower_builtin
-# from numba.cuda.cudaimpl import lower
-#
-# from ucb import main, interact, trace
+
 from collections import OrderedDict
+
+from gui import game_state
+
 
 ################
 # Core Classes #
@@ -470,6 +469,27 @@ class QueenAnt(ThrowerAnt):
         # END Problem 12
 
 
+def make_slow(action, bee):
+    def slow_action(gamestate):
+        if gamestate % 2 == 0:
+            action(gamestate)
+    return slow_action
+
+def apply_status(status, bee, length):
+    original_action = bee.action
+    new_action = status(bee.action, bee)
+
+    def applied_action(gamestate):
+        nonlocal length
+        if length > 0:
+            new_action(gamestate)
+            length -= 1
+        else:
+            original_action(gamestate)
+    return applied_action
+
+
+
 ################
 # Extra Challenge #
 ################
@@ -480,13 +500,14 @@ class SlowThrower(ThrowerAnt):
     name = 'Slow'
     food_cost = 6
     # BEGIN Problem EC 1
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem EC 1
 
     def throw_at(self, target):
         # BEGIN Problem EC 1
         "*** YOUR CODE HERE ***"
-        # END Problem EC 1
+        if target:
+            apply_status(make_slow, target, 5)
 
 
 class ScaryThrower(ThrowerAnt):
