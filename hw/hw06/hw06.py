@@ -196,11 +196,11 @@ def prune_small(t, n):
     >>> t3
     Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2)])])
     """
-    while ____:
-        largest = max(____, key=____)
+    while not t.is_leaf() and len(t.branches) > n:
+        largest = max(t.branches, key=lambda x : x.label)
         t.branches.remove(largest)
     for b in t.branches:
-        ____
+        prune_small(b, n)
 
 
 def delete(t, x):
