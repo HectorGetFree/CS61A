@@ -253,7 +253,18 @@ def two_list(vals, counts):
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
     "*** YOUR CODE HERE ***"
+    result = []
+    for i in range(len(counts)):
+        while counts[i] > 0:
+            result.append(vals[i])
+            counts[i] -= 1
 
+    def two_list_helper(v):
+        if len(v) == 0:
+            return Link.empty
+        return Link(v[0], two_list_helper(v[1:]))
+
+    return two_list_helper(result)
 
 class Link:
     """A linked list.
