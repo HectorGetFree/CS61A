@@ -135,6 +135,17 @@ def store_digits(n):
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     """
     "*** YOUR CODE HERE ***"
+    def store_helper(a, k):
+        if k == 0:
+            return Link(a)
+        return Link(a // pow(10, k), store_helper(a % pow(10, k), k - 1))
+    count = 0
+    copy = n
+    while copy > 0:
+        copy //= 10
+        count += 1
+
+    return store_helper(n, count - 1)
 
 
 
