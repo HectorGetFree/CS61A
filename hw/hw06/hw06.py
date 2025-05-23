@@ -255,16 +255,14 @@ def two_list(vals, counts):
     "*** YOUR CODE HERE ***"
     result = []
     for i in range(len(counts)):
-        while counts[i] > 0:
-            result.append(vals[i])
-            counts[i] -= 1
+        result.extend([vals[i]] * counts[i])  # 更简洁
 
-    def two_list_helper(v):
-        if len(v) == 0:
+    def helper(index):
+        if index == len(result):
             return Link.empty
-        return Link(v[0], two_list_helper(v[1:]))
+        return Link(result[index], helper(index + 1))
 
-    return two_list_helper(result)
+    return helper(0)
 
 class Link:
     """A linked list.
