@@ -315,7 +315,14 @@ def common_players(roster):
 	Team D ['ben']
 	"""
 	"*** YOUR CODE HERE ***"
-
+	result = {}
+	for player in roster:
+		team = roster[player]
+		if team not in result:
+			result[team] = [player]
+		else:
+			result[team].append(player)
+	return result
 
 
 
