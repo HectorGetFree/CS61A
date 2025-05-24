@@ -532,6 +532,16 @@ def every_other(s):
 	"""
 	"*** YOUR CODE HERE ***"
 
+	def helper(link):
+		if link is Link.empty or link.rest is Link.empty:
+			return
+		# 删除下一个节点（奇数索引）
+		link.rest = link.rest.rest
+		# 递归处理剩下的部分
+		helper(link.rest)
+
+	helper(s)
+
 
 def slice_link(link, start, end):
 	"""Slices a linked list from start to end (as with a normal Python list).
