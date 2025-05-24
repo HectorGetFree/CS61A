@@ -486,6 +486,10 @@ class AggressivePlayer(Player):
 	"""
 	def choose(self, other):
 		"*** YOUR CODE HERE ***"
+		if self.popularity <= other.popularity:
+			return self.debate
+		else:
+			return self.speech
 
 class CautiousPlayer(Player):
 	"""
@@ -503,6 +507,10 @@ class CautiousPlayer(Player):
 	"""
 	def choose(self, other):
 		"*** YOUR CODE HERE ***"
+		if self.popularity == 0:
+			return self.debate
+		else:
+			return self.speech
 
 
 def every_other(s):
