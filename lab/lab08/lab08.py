@@ -285,9 +285,9 @@ def shuffle_pairs(lst):
 	[]
 	"""
 	assert len(lst) % 2 == 0, 'len(lst) must be even'
-	half = ________________
-	for ____ in ____:
-		_____, _____ = _____, _____
+	half = range(0, len(lst), 2)
+	for i in half:
+		lst[i], lst[i + 1] = lst[i + 1], lst[i]
 
 
 def common_players(roster):
@@ -315,6 +315,7 @@ def common_players(roster):
 	Team D ['ben']
 	"""
 	"*** YOUR CODE HERE ***"
+
 
 
 
