@@ -250,6 +250,14 @@ def perms(seq):
 	[['a', 'b'], ['b', 'a']]
 	"""
 	"*** YOUR CODE HERE ***"
+	if len(seq) <= 1:
+		yield list(seq)
+	else:
+		for i in range(len(seq)):
+			rest = seq[:i] + seq[i + 1:]
+			for p in perms(rest):
+				yield [seq[i]] + p
+
 
 
 def shuffle_pairs(lst):
