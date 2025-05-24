@@ -61,6 +61,16 @@ def add_d_leaves(t, v):
         10
     """
     "*** YOUR CODE HERE ***"
+    def helper(tree, val, depth):
+        # 先递归再添加，则样就不会更改原来的深度
+        for b in tree.branches:
+            helper(b, val, depth + 1)
+        for _ in range(depth):
+            tree.branches.append(Tree(val))
+    helper(t, v, 0)
+
+
+
 
 
 def has_path(t, target):
@@ -95,7 +105,14 @@ def has_path(t, target):
     """
     assert len(target) > 0, 'no path for empty target.'
     "*** YOUR CODE HERE ***"
-
+    if t.label == target[0]:
+        if len(target) == 1:
+            return True
+        for b in t.branches:
+            if has_path(b, target[1:]):
+                return True
+        return False
+    return False
 
 def level_mutation_link(t, funcs):
 	"""Mutates t using the functions in the linked list funcs.
