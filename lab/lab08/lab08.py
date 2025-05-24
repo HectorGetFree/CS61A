@@ -552,6 +552,37 @@ def slice_link(link, start, end):
 	<1 4 1>
 	"""
 	"*** YOUR CODE HERE ***"
+	if start >= end:
+		return Link.empty
+	index = 0
+	p = link
+	while index < start:
+		p = p.rest
+		index += 1
+
+	if p == Link.empty:
+		return Link.empty
+
+	result = None
+	tail = None
+	while p != Link.empty and index <= end:
+		new_node = Link(p.first)
+
+		if result is None:
+			result = new_node
+			tail = new_node
+		else:
+			# 后续节点
+			tail.rest = new_node
+			tail = new_node
+
+		p = p.rest
+		index += 1
+	return result
+
+
+
+
 
 
 class Tree:
