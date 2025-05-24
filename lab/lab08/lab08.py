@@ -131,16 +131,16 @@ def level_mutation_link(t, funcs):
 	>>> t3    # Level 0: 1+1=2; Level 1: 2*5=10; no further levels, so apply remaining z ** 2: 10**2=100
 	Tree(2, [Tree(100)])
 	"""
-	if _____________________:
+	if not t:
 		return
-	t.label = _____________________
-	remaining = _____________________
-	if __________________ and __________________:
-		while _____________________:
-			_____________________
+	t.label = funcs.first(t.label)
+	remaining = funcs.rest
+	if t.is_leaf() and remaining:
+		while remaining:
+			t.label = remaining.first(t.label)
 			remaining = remaining.rest
 	for b in t.branches:
-		_____________________
+		level_mutation_link(b, remaining)
 
 
 def merge_numbers(n1, n2):
