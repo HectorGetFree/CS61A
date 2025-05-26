@@ -1,3 +1,5 @@
+from timeit import reindent
+
 from scheme_eval_apply import *
 from scheme_utils import *
 from scheme_classes import *
@@ -209,7 +211,17 @@ def make_let_frame(bindings, env):
         raise SchemeError('bad bindings list in let form')
     names = vals = nil
     # BEGIN PROBLEM 14
-    "*** YOUR CODE HERE ***"
+    p = bindings
+    count = 0
+    while p is not nil:
+        names = Pair(p.first.first, names)
+        if validate_form(p.first.rest, 1, 1):
+            raise SchemeError()
+        vals = Pair(scheme_eval(p.first.rest.first,env), vals)
+        p = p.rest
+        count += 1
+    if validate_form(names, count, count) or validate_form(vals, count, count) or validate_formals(names):
+        raise SchemeError()
     # END PROBLEM 14
     return env.make_child_frame(names, vals)
 
