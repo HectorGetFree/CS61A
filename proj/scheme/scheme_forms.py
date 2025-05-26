@@ -123,7 +123,16 @@ def do_and_form(expressions, env):
     False
     """
     # BEGIN PROBLEM 12
-    "*** YOUR CODE HERE ***"
+    pointer = expressions
+    if pointer is nil:
+        return True
+    while pointer.rest is not nil:
+        value = scheme_eval(pointer.first, env)
+        if is_scheme_false(value):
+            return value
+        pointer = pointer.rest
+    return scheme_eval(pointer.first, env)
+
     # END PROBLEM 12
 
 def do_or_form(expressions, env):
@@ -141,7 +150,15 @@ def do_or_form(expressions, env):
     6
     """
     # BEGIN PROBLEM 12
-    "*** YOUR CODE HERE ***"
+    p = expressions
+    if p is nil:
+        return False
+    while p.rest is not nil:
+        value = scheme_eval(p.first, env)
+        if is_scheme_true(value):
+            return value
+        p = p.rest
+    return scheme_eval(p.first, env)
     # END PROBLEM 12
 
 def do_cond_form(expressions, env):
